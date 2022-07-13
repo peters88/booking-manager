@@ -2,7 +2,6 @@ package com.psayol.bookingmanager.service;
 
 import com.psayol.bookingmanager.exception.InvalidDatesException;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
@@ -15,13 +14,26 @@ public class UtilsTest {
 
 
     @Test
-    public void checkIsValidDate_whenValidDate_thenReturnTrue(){
+    public void checkIsValidDate_whenInvalidDate_thenReturnException(){
         utils = new Utils();
 
-        LocalDate date = LocalDate.now().minusDays(5);
+        LocalDate dateFrom = LocalDate.now().minusDays(5);
+        LocalDate dateTo = LocalDate.now().plusDays(5);
 
         assertThrows(InvalidDatesException.class, () -> {
-            utils.checkIsValidDate(date);
+            utils.checkIsValidDate(dateFrom,dateTo);
+        });
+    }
+
+    @Test
+    public void checkIsValidDate_whenEqualValidDate_thenReturnException(){
+        utils = new Utils();
+
+        LocalDate dateFrom = LocalDate.now().plusDays(5);
+        LocalDate dateTo = LocalDate.now().plusDays(5);
+
+        assertThrows(InvalidDatesException.class, () -> {
+            utils.checkIsValidDate(dateFrom,dateTo);
         });
     }
 }

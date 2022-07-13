@@ -148,7 +148,7 @@ public class BookingService {
 
 
     public Booking saveNewBooking(BookingRequest request) {
-        utils.checkIsValidDate(request.getDateFrom());
+        utils.checkIsValidDate(request.getDateFrom(),request.getDateTo());
 
         Booking booking = new BookingBuilder()
                 .setDateFrom(request.getDateFrom())
@@ -186,6 +186,8 @@ public class BookingService {
             ResponseDataDTO response = ResponseDataBuilder.buildSuccessResponse();
             response.setPayload(new ResponsePayloadBuilder()
                     .setBookingId(responseObj.getId())
+                    .setDateFrom(responseObj.getDateFrom())
+                    .setDateTo(responseObj.getDateTo())
                     .setGuestId(responseObj.getGuest().getId())
                     .setPropertyId(responseObj.getProperty().getId())
                     .build());
@@ -197,7 +199,7 @@ public class BookingService {
     }
 
     public Booking rebookBooking(BookingRequest request) {
-        utils.checkIsValidDate(request.getDateFrom());
+        utils.checkIsValidDate(request.getDateFrom(),request.getDateTo());
 
         Booking booking = bookingRepository.findById(request.getId()).orElse(null);
 

@@ -75,7 +75,7 @@ public class OwnerBlockService {
     }
 
     public List<OwnerBlock> saveOwnerBlock(OwnerBlockRequest request) {
-        utils.checkIsValidDate(request.getBlockFrom());
+        utils.checkIsValidDate(request.getBlockFrom(),request.getBlockTo());
 
         List<OwnerBlock> ownerBlocks = convertOwnerBlockRequestToOwnerBlock(request);
 

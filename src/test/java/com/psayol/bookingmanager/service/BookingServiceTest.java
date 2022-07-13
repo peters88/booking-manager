@@ -14,6 +14,7 @@ import com.psayol.bookingmanager.request.BookingRequest;
 import com.psayol.bookingmanager.response.ResponseConstants;
 import com.psayol.bookingmanager.response.ResponseDataDTO;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -76,8 +77,7 @@ public class BookingServiceTest {
                 .build();
 
         when(bookingRepository.findById(1L)).thenReturn(Optional.of(booking));
-        when(bookingRepository.findById(9L)).thenReturn(null);
-
+        when(bookingRepository.findById(9L)).thenReturn(Optional.empty());
 
         when(propertyRepository.findById(1L)).thenReturn(Optional.of(property));
         when(guestRepository.findById(1L)).thenReturn(Optional.of(guest));
@@ -95,10 +95,10 @@ public class BookingServiceTest {
 
     @Test
     public void getBooking_whenIdNotExists_thenReturnErrorResult(){
-        ResponseEntity<ResponseDataDTO> response = bookingService.getBooking(9L);
 
-        assertEquals(response.getBody().getStatusCode(), ResponseConstants.FAILURE.getCode());
-        assertEquals(response.getBody().getStatusMessage(), ResponseConstants.FAILURE.getMessage());
+        assertThrows(UnableToProcessRequestException.class, () -> {
+            bookingService.getBooking(9L);
+        });
     }
 
     @Test
