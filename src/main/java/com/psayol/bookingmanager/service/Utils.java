@@ -12,7 +12,7 @@ public class Utils {
 
 
     public void checkIsValidDate(LocalDate dateFrom,LocalDate dateTo) {
-        if(dateFrom.isBefore(LocalDate.now()) || dateFrom.isEqual(dateTo))
+        if(dateFrom == null || dateTo== null || dateFrom.isBefore(LocalDate.now()) || dateFrom.isEqual(dateTo))
             throw new InvalidDatesException(ResponseConstants.INVALID_DATE_EXCEPTION.getMessage());
     }
 
