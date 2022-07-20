@@ -33,38 +33,39 @@ public class OwnerBlockServiceTest {
     private PropertyRepository propertyRepository;
     @Mock
     private OwnerRepository ownerRepository;
-    @Mock
+
     private Utils utils;
 
     @InjectMocks
-    private OwnerBlockService ownerBlockService = new OwnerBlockService(blockRepository, propertyRepository,utils,ownerRepository);
+    private OwnerBlockService ownerBlockService = new OwnerBlockService(blockRepository, propertyRepository,ownerRepository);
 
     private static final String UUID = "fc00d4a0-b50f-436f-86eb-9f32f3395239";
 
     @BeforeEach
     void setMockOutput() {
+        utils = new Utils();
+
         Property property = new Property(1L);
         Owner owner = new Owner(1L);
 
-        OwnerBlock ownerBlock = new OwnerBlock(LocalDate.parse("2022-02-20"), property, UUID,owner);
+        OwnerBlock ownerBlock = new OwnerBlock(LocalDate.now().plusDays(1), property, UUID,owner);
         List<OwnerBlock> ownerBlocks = new ArrayList<>();
         ownerBlocks.add(ownerBlock);
 
-        OwnerBlock ownerBlockResponse = new OwnerBlock(1L,LocalDate.parse("2022-02-20"), property, UUID,owner);
+        OwnerBlock ownerBlockResponse = new OwnerBlock(1L,LocalDate.now().plusDays(1), property, UUID,owner);
         List<OwnerBlock> ownerBlocksResponse = new ArrayList<>();
         ownerBlocksResponse.add(ownerBlockResponse);
 
         when(propertyRepository.findById(1L)).thenReturn(Optional.of(property));
         when(ownerRepository.findById(1L)).thenReturn(Optional.of(owner));
         when(blockRepository.saveAll(Mockito.any(List.class))).thenReturn(ownerBlocksResponse);
-        when(utils.generateUUIDString()).thenReturn(UUID);
     }
 
     @Test
     public void createOwnerBlock_whenRequestOk_thenReturnSuccess(){
 
         OwnerBlockRequest request = new OwnerBlockRequest(1L,1L
-                ,LocalDate.parse("2022-02-20"),LocalDate.parse("2022-02-21"),UUID);
+                ,LocalDate.now().plusDays(1),LocalDate.now().plusDays(3),UUID);
 
         ResponseEntity<ResponseDataDTO> response = ownerBlockService.createOwnerBlock(request);
 

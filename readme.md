@@ -13,11 +13,11 @@ password:
 Endpoints available:
 ````
 ======= Get Bookings
-    - Endpoint: GET http://localhost:8080/api/v1/getbooking?bookingId=3
+    - Endpoint: GET http://localhost:8080/api/v1/booking?booking-id=3
     - Returns a booking given the booking id as parameter
 
 ======= New Booking
-    - Endpoint: POST http://localhost:8080/api/v1/newbooking
+    - Endpoint: POST http://localhost:8080/api/v1/booking
     - raw data body example:
         {
             "dateFrom": "2022-06-01",
@@ -28,7 +28,7 @@ Endpoints available:
     - Saves a Booking and Blocks returns Booking information
 
 ======= Update Booking
-    - Endpoint: PUT http://localhost:8080/api/v1/updatebooking
+    - Endpoint: PUT http://localhost:8080/api/v1/booking
     - raw data body example:
         {
             "id": 1,
@@ -38,11 +38,11 @@ Endpoints available:
     - Deletes the old Blocks and Saves the new ones, Updates dates of Booking and modify status to REBOOKED
 
 ======= Delete Booking
-    - Endpoint: PUT http://localhost:8080/api/v1/deletebooking
+    - Endpoint: PUT http://localhost:8080/api/v1/booking/cancel
     - Modifies Booking status to CANCELED and deletes Blocks of a Booking given the Booking id as parameter
 
 ======= New OwnerBlock
-    - Endpoint: POST http://localhost:8080/api/v1/newblock
+    - Endpoint: POST http://localhost:8080/api/v1/owner-block
     - raw data body example:
         {
             "ownerId": 1,
@@ -53,7 +53,7 @@ Endpoints available:
     - Saves a Owner Block. Generates a UUID to identify the complete Block
 
 ======= Delete Block
-    - Endpoint: PUT http://localhost:8080/api/v1/deleteblock
+    - Endpoint: DELETE http://localhost:8080/api/v1/owner-block
     - Given a ownerBlockId as parameter it deletes the Block
 
 

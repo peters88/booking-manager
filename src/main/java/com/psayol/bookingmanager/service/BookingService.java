@@ -32,17 +32,16 @@ public class BookingService {
     private Utils utils;
 
     public BookingService(BookingRepository bookingRepository, BlockRepository blockRepository, GuestRepository guestRepository,
-                          BookingBlockService bookingBlockService, PropertyRepository propertyRepository,Utils utils){
+                          BookingBlockService bookingBlockService, PropertyRepository propertyRepository){
         this.bookingRepository = bookingRepository;
         this.blockRepository = blockRepository;
         this.guestRepository = guestRepository;
         this.bookingBlockService = bookingBlockService;
         this.propertyRepository = propertyRepository;
-        this.utils = utils;
     }
 
     /***
-     * This operation finds in the database a book given the bookId.
+     * This operation finds in the database a booking given the bookingId.
      * It returns a response object with all its values
      *
      * @param bookingId
@@ -119,7 +118,7 @@ public class BookingService {
     /***
      * Saves new booking given all the values in the db
      * returns all values including id
-     * if Blocks in the same date exists, will throw constraintViolationException meaning another transaction comitted before this one taking the available days
+     * if Blocks in the same date exists, will throw constraintViolationException meaning another transaction commited before this one taking the available days
      *
      * @param request
      * @return

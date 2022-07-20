@@ -15,6 +15,9 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.UUID;
 
 @Getter
@@ -31,18 +34,24 @@ public abstract class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Size(min=2, max=100)
     @Column(name = "first_name")
     private String firstName;
 
+    @Size(min=2, max=100)
     @Column(name = "last_name")
     private String lastName;
 
+    @Size(min=5, max=14)
     @Column(name = "phone_number")
     private String phoneNumber;
 
+    @NotNull(message = "Email cannot be null.")
+    @Email(message="Invalid email format")
     @Column(name = "email", nullable = false, unique=true)
     private String email;
 
+    @NotNull(message = "Password cannot be null.")
     @Column(name = "password", nullable = false)
     private String password;
 

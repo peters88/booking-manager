@@ -41,8 +41,6 @@ public class BookingServiceTest {
     private GuestRepository guestRepository;
     @Mock
     private PropertyRepository propertyRepository;
-    @Mock
-    private Utils utils;
 
     Booking booking;
     Booking booking2;
@@ -51,7 +49,7 @@ public class BookingServiceTest {
 
     @InjectMocks
     private BookingService bookingService = new BookingService(bookingRepository, blockRepository, guestRepository,
-            bookingBlockService, propertyRepository, utils);
+            bookingBlockService, propertyRepository);
 
     @BeforeEach
     void setMockOutput() {
@@ -61,16 +59,16 @@ public class BookingServiceTest {
 
         booking = new BookingBuilder()
                 .setId(1L)
-                .setDateFrom(LocalDate.parse("2022-02-20"))
-                .setDateTo(LocalDate.parse("2022-02-23"))
+                .setDateFrom(LocalDate.now().plusDays(15))
+                .setDateTo(LocalDate.now().plusDays(30))
                 .setStatus(BookingStatus.BOOKED)
                 .setGuest(guest)
                 .setProperty(property)
                 .build();
 
         booking2 = new BookingBuilder()
-                .setDateFrom(LocalDate.parse("2022-02-20"))
-                .setDateTo(LocalDate.parse("2022-02-23"))
+                .setDateFrom(LocalDate.now().plusDays(15))
+                .setDateTo(LocalDate.now().plusDays(30))
                 .setStatus(BookingStatus.BOOKED)
                 .setGuest(guest)
                 .setProperty(property)
@@ -103,7 +101,7 @@ public class BookingServiceTest {
 
     @Test
     public void createBooking_whenCorrectBooking_thenReturnBookingSaved(){
-        BookingRequest request = new BookingRequest(null,LocalDate.parse("2022-02-20"),LocalDate.parse("2022-02-23"),1L,1L);
+        BookingRequest request = new BookingRequest(null,LocalDate.now().plusDays(15),LocalDate.now().plusDays(30),1L,1L);
 
         ResponseEntity<ResponseDataDTO> response = bookingService.createBooking(request);
 
@@ -113,7 +111,7 @@ public class BookingServiceTest {
 
     @Test
     public void createBooking_whenWrongGuestBooking_thenReturnFailure(){
-        BookingRequest request = new BookingRequest(null,LocalDate.parse("2022-02-20"),LocalDate.parse("2022-02-23"),9L,1L);
+        BookingRequest request = new BookingRequest(null,LocalDate.now().plusDays(15),LocalDate.now().plusDays(30),9L,1L);
 
         assertThrows(UnableToProcessRequestException.class, () -> {
             bookingService.createBooking(request);

@@ -35,16 +35,15 @@ public class OwnerBlockService {
     private OwnerRepository ownerRepository;
     private Utils utils;
 
-    public OwnerBlockService(BlockRepository blockRepository, PropertyRepository propertyRepository,Utils utils,OwnerRepository ownerRepository){
+    public OwnerBlockService(BlockRepository blockRepository, PropertyRepository propertyRepository,OwnerRepository ownerRepository){
         this.blockRepository = blockRepository;
         this.propertyRepository = propertyRepository;
-        this.utils = utils;
         this.ownerRepository = ownerRepository;
     }
 
     /***
      * Create a BLock of type OwnerBlock in the database to each date bewtween the range given
-     * Generates a UUID to identify the the group of Blocks to a particular OwnerBlock range
+     * Generates a UUID to identify the group of Blocks to a particular OwnerBlock range
      *
      * Returns the UUID ownerBlockId as String
      *

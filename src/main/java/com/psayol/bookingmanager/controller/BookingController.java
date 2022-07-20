@@ -27,36 +27,36 @@ public class BookingController {
         this.ownerBlockService = ownerBlockService;
     }
 
-    @GetMapping(value="/getbooking",produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ResponseDataDTO> getBooking(@RequestParam(value = "bookingId") Long bookingId) {
+    @GetMapping(value="/booking",produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ResponseDataDTO> getBooking(@RequestParam(value = "booking-id") Long bookingId) {
         return bookingService.getBooking(bookingId);
     }
 
-    @RequestMapping(value="/newbooking", method= {RequestMethod.POST})
+    @RequestMapping(value="/booking", method= {RequestMethod.POST})
     public ResponseEntity<ResponseDataDTO> createBooking(@RequestBody BookingRequest request)
     {
         return bookingService.createBooking(request);
     }
 
-    @RequestMapping(value="/deleteblock", method= {RequestMethod.PUT})
+    @RequestMapping(value="/owner-block", method= {RequestMethod.DELETE})
     public ResponseEntity<ResponseDataDTO> deleteOwnerBlock(@RequestParam("ownerBlockId") String ownerBlockId)
     {
         return ownerBlockService.deleteOwnerBlock(ownerBlockId);
     }
 
-    @RequestMapping(value="/newblock", method= {RequestMethod.POST})
+    @RequestMapping(value="/owner-block", method= {RequestMethod.POST})
     public ResponseEntity<ResponseDataDTO> createOwnerBlock(@RequestBody OwnerBlockRequest request)
     {
         return ownerBlockService.createOwnerBlock(request);
     }
 
-    @RequestMapping(value="/updatebooking", method= {RequestMethod.PUT})
+    @RequestMapping(value="/booking", method= {RequestMethod.PUT})
     public ResponseEntity<ResponseDataDTO> updateBooking(@RequestBody BookingRequest request)
     {
         return bookingService.updateBooking(request);
     }
 
-    @RequestMapping(value="/deletebooking", method= {RequestMethod.PUT})
+    @RequestMapping(value="/booking/cancel", method= {RequestMethod.PUT})
     public ResponseEntity<ResponseDataDTO> deleteBooking(@RequestParam("bookingId") Long bookingId)
     {
         return bookingService.deleteBooking(bookingId);
