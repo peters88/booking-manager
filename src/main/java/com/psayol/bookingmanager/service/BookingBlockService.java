@@ -24,9 +24,6 @@ public class BookingBlockService {
 
 
     public List<BookingBlock> saveBookingBlocks(Property property, Booking booking, LocalDate dateFrom, LocalDate dateTo) {
-//        List<BookingBlock> bookingBlocks = createBookingBlocks(property, booking, dateFrom, dateTo);
-//
-//        return (List<BookingBlock>) blockRepository.saveAll(bookingBlocks);
 
         return createBookingBlocks(property, booking, dateFrom, dateTo);
     }
@@ -34,15 +31,8 @@ public class BookingBlockService {
 
     public List<BookingBlock> createBookingBlocks(Property property, Booking booking, LocalDate dateFrom, LocalDate dateTo) {
         return dateFrom.datesUntil(dateTo.plusDays(1))
-//                .map(date -> createBookingBlockFromDate(property,booking,date))
                 .map(date -> saveBookingBlockFromDate(property,booking,date))
                 .collect(Collectors.toList());
-    }
-
-
-    public BookingBlock createBookingBlockFromDate(Property property, Booking booking, LocalDate date) {
-
-        return new BookingBlock(date,property,booking);
     }
 
     public BookingBlock saveBookingBlockFromDate(Property property, Booking booking, LocalDate date) {

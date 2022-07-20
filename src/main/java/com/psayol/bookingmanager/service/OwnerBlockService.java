@@ -76,9 +76,7 @@ public class OwnerBlockService {
     public List<OwnerBlock> saveOwnerBlock(OwnerBlockRequest request) {
         utils.checkIsValidDate(request.getBlockFrom(),request.getBlockTo());
 
-        List<OwnerBlock> ownerBlocks = convertOwnerBlockRequestToOwnerBlock(request);
-
-        return (List<OwnerBlock>) blockRepository.saveAll(ownerBlocks);
+        return convertOwnerBlockRequestToOwnerBlock(request);
     }
 
     public List<OwnerBlock> convertOwnerBlockRequestToOwnerBlock(OwnerBlockRequest request){
@@ -96,7 +94,9 @@ public class OwnerBlockService {
         if(property == null || owner == null)
             throw new UnableToProcessRequestException(ResponseConstants.UNABLE_PROCESS_REQUEST_EXCEPTION.getMessage());
 
-        return new OwnerBlock(date,property,ownerBlockId,owner);
+        OwnerBlock ownerBlock = new OwnerBlock(date,property,ownerBlockId,owner);
+
+        return blockRepository.save(ownerBlock);
     }
 
     /***
