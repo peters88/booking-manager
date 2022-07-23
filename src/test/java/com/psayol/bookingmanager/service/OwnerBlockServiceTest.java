@@ -58,6 +58,7 @@ public class OwnerBlockServiceTest {
 
         when(propertyRepository.findById(1L)).thenReturn(Optional.of(property));
         when(ownerRepository.findById(1L)).thenReturn(Optional.of(owner));
+        when(blockRepository.save(ownerBlock)).thenReturn(ownerBlockResponse);
         when(blockRepository.saveAll(Mockito.any(List.class))).thenReturn(ownerBlocksResponse);
     }
 
