@@ -2,6 +2,7 @@ package com.psayol.bookingmanager.response;
 
 import com.psayol.bookingmanager.model.BookingStatus;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,6 +12,7 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
+@Builder
 @EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
